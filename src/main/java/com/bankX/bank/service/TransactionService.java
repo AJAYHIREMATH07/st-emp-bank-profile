@@ -11,7 +11,9 @@ import com.bankX.bank.repository.AccountRepository;
 import com.bankX.bank.repository.TransactionRepository;
 
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TransactionService {
 	@Autowired
     AccountRepository accountRepository;
