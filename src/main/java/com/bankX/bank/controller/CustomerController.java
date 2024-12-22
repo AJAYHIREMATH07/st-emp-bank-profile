@@ -1,10 +1,11 @@
 package com.bankX.bank.controller;
 
+import com.bankX.bank.Filter.CustomerFilters;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 import com.bankX.bank.entity.CustomerEntity;
 import com.bankX.bank.service.CustomerService;
@@ -28,6 +29,15 @@ public class CustomerController {
 			
 		}
 		return null;
+    }
+//	@GetMapping("/getCustomers/{customerFilters}")
+	@GetMapping("/getCustomers")
+	public Page<CustomerEntity> getCustomers(CustomerFilters customerFilters) throws JsonProcessingException {
+
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		CustomerFilters customerFilters1 = objectMapper.readValue(customerFilters, CustomerFilters.class);
+		Page<CustomerEntity> customers = customerService.getCustomers(customerFilters);
+		return customers;
     }
 
 }
